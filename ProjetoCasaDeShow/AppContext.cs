@@ -13,7 +13,6 @@ namespace ProjetoCasaDeShow
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             modelBuilder.Entity<CasaDeShow>().HasMany(casa => casa.Eventos).WithOne(evento => evento.CasaDeShow);
-
             modelBuilder.Entity<Evento>().HasOne(evento => evento.CasaDeShow).WithMany(casa => casa.Eventos);
         }
     }

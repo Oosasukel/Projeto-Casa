@@ -5,20 +5,21 @@ using ProjetoCasaDeShow.Models;
 
 namespace ProjetoCasaDeShow.Repositories
 {
+    public interface IEventoRepository
+    {
+        void Add(Evento evento);
+    }
+    
     public class EventoRepository : BaseRepository<Evento>, IEventoRepository
     {
         public EventoRepository(AppContext contexto) : base(contexto)
         {
         }
 
-        public void Add(Evento b)
+        public void Add(Evento evento)
         {
-            dbSet.Add(b);
-        }
-
-        public Evento GetEventoId(int idDaCasa)
-        {
-            return dbSet.Where(evento => evento.CasaDeShowId == idDaCasa).SingleOrDefault();
+            dbSet.Add(evento);
+            contexto.SaveChanges();
         }
     }
 }

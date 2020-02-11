@@ -1733,26 +1733,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rodri\\.nuget\\packages\\": {}
+    "C:\\Users\\ROGN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rodri\\Downloads\\ProjetoCasaDeShow\\ProjetoCasaDeShow.csproj",
+      "projectUniqueName": "C:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\ProjetoCasaDeShow.csproj",
       "projectName": "ProjetoCasaDeShow",
-      "projectPath": "C:\\Users\\rodri\\Downloads\\ProjetoCasaDeShow\\ProjetoCasaDeShow.csproj",
-      "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rodri\\Downloads\\ProjetoCasaDeShow\\obj\\",
+      "projectPath": "C:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\ProjetoCasaDeShow.csproj",
+      "packagesPath": "C:\\Users\\ROGN\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\ROGN\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

@@ -35,7 +35,7 @@ namespace ProjetoCasaDeShow
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -60,6 +60,7 @@ namespace ProjetoCasaDeShow
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            serviceProvider.GetService<AppContext>().Database.Migrate();
         }
     }
 }
