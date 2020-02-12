@@ -1,31 +1,37 @@
+@model CasaDeShow
+@{
+    var casas = ViewBag.casas;
+}
 <h3>Criar Casa</h3>
 
 <div class="panel panel-default">
     <div>
-        <div>
+        <form asp-action="AddCasa" method="Post">
             <div class="form-group">
-                <label class="control-lavel">Nome<input type="text" class="form-control" id="nomeCasa" placeHolder="Villa Country"></label>
-                <label class="control-lavel">Endereço<input type="text" class="form-control" id="precoEvento" placeHolder="Av. Francisco Matarazzo, 774 - Água Branca, São Paulo - SP"></label>
-                <label class="control-lavel">Capacidade<input type="number" class="form-control" id="capacidadeCasa" placeHolder="800"></label>
+                <label class="control-lavel">Nome<input asp-for="@Model.Nome" type="text" class="form-control" id="nomeCasa" placeHolder="Villa Country"></label>
+                <label class="control-lavel">Endereço<input asp-for="@Model.Endereco" type="text" class="form-control" id="precoEvento" placeHolder="Av. Francisco Matarazzo, 774 - Água Branca, São Paulo - SP"></label>
+                <label class="control-lavel">Capacidade<input asp-for="@Model.Capacidade" type="number" class="form-control" id="capacidadeCasa" placeHolder="800"></label>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success">
                     Criar
                 </button>
             </div>
-        </div>
+        </form>
     </div>
 
     <table class="tabela">
+        @foreach (var casa in casas)
+        {
             <tr>
                 <td>
-                    Nome
+                    @casa.Nome
                 </td>
                 <td>
-                    Endereço
+                    @casa.Endereco
                 </td>
                 <td>
-                    Capacidade
+                    @casa.Capacidade
                 </td>
                 <td>
                     <button class="btn btn-primary">Editar</button>
@@ -33,23 +39,7 @@
                 <td>
                     <button class="btn btn-danger">Excluir</button>
                 </td>
-            </tr>
-            <tr>
-                <td>
-                    Nome
-                </td>
-                <td>
-                    Endereço
-                </td>
-                <td>
-                    Capacidade
-                </td>
-                <td>
-                    <button class="btn btn-primary">Editar</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger">Excluir</button>
-                </td>
-            </tr>
+            </tr> 
+        }
         </table>
 </div>

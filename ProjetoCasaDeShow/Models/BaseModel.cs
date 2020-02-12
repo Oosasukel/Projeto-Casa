@@ -1,4 +1,6 @@
 
+using System.Runtime.Serialization;
+
 namespace ProjetoCasaDeShow.Models
 {
     public class BaseModel

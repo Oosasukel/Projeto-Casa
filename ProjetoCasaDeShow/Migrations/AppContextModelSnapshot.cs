@@ -29,9 +29,6 @@ namespace ProjetoCasaDeShow.Migrations
                     b.Property<string>("Endereco")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("EventosId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 

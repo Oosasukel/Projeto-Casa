@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjetoCasaDeShow.Migrations
 {
-    public partial class AddEventoECasa : Migration
+    public partial class addEventoECasa : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,8 +16,7 @@ namespace ProjetoCasaDeShow.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(nullable: true),
                     Capacidade = table.Column<int>(nullable: false),
-                    Endereco = table.Column<string>(nullable: true),
-                    EventosId = table.Column<int>(nullable: false)
+                    Endereco = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

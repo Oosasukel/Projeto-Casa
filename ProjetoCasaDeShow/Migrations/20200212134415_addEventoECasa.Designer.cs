@@ -9,8 +9,8 @@ using ProjetoCasaDeShow;
 namespace ProjetoCasaDeShow.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20200210134433_AddEventoECasa")]
-    partial class AddEventoECasa
+    [Migration("20200212134415_addEventoECasa")]
+    partial class addEventoECasa
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,9 +30,6 @@ namespace ProjetoCasaDeShow.Migrations
 
                     b.Property<string>("Endereco")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("EventosId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");

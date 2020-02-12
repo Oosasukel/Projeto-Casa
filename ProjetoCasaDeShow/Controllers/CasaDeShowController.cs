@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ProjetoCasaDeShow.Models;
 
 namespace ProjetoCasaDeShow.Controllers
 {
@@ -11,7 +12,13 @@ namespace ProjetoCasaDeShow.Controllers
             this.dataService = dataService;
         }
         public IActionResult CriarCasaDeShow(){
+            ViewBag.casas = dataService.GetCasaDeShowRepository().GetCasas();
             return View();
+        }
+
+        public IActionResult AddCasa(CasaDeShow casaDeShow){
+            dataService.GetCasaDeShowRepository().Add(casaDeShow);
+            return RedirectToAction("CriarCasaDeShow");
         }
     }
 }
