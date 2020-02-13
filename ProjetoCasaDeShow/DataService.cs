@@ -5,7 +5,6 @@ namespace ProjetoCasaDeShow
 {
     public interface IDataService
     {
-        void TestaDB();
         IEventoRepository GetEventoRepository();
         ICasaDeShowRepository GetCasaDeShowRepository();
     }
@@ -32,11 +31,6 @@ namespace ProjetoCasaDeShow
         public IEventoRepository GetEventoRepository()
         {
             return eventoRepository;
-        }
-
-        public void TestaDB()
-        {
-            
         }
     }
 }

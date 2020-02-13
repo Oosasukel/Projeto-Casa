@@ -13,9 +13,13 @@
 
 <div>
     <div>
+        @{
+            // required oninvalid="this.setCustomValidity('Informe o campo')"
+            // oninput ="try{setCustomValidity('')catch(e){}"
+        }
         <form class="panel-body" asp-action="AddEvento">
             <div class="form-group">
-                <label class="control-lavel">Nome<input asp-for="@Model.Nome" type="text" class="form-control" id="nomeEvento" placeHolder="Linkin Park"></label>
+                <label class="control-lavel">Nome<input asp-for="@Model.Nome" type="text" class="form-control" id="nomeEvento" placeHolder="Linkin Park" required></label>
                 <label class="control-lavel">Data<input asp-for="@Model.Data" type="date" class="form-control" id="dataEvento"></label>
                 <label class="control-lavel">Preço da Entrada (R$)<input asp-for="@Model.Preco" type="number" class="form-control" id="precoEvento" placeHolder="200,00"></label>
                 <label class="control-lavel">Genero<select asp-for="@Model.Genero" class="form-control sigle-select" id="generoEvento">

@@ -8,8 +8,8 @@ using ProjetoCasaDeShow;
 namespace ProjetoCasaDeShow.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20200212172534_addEventoCasa")]
-    partial class addEventoCasa
+    [Migration("20200213161758_addcasaevento")]
+    partial class addcasaevento
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,6 +54,7 @@ namespace ProjetoCasaDeShow.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<decimal>("Preco")

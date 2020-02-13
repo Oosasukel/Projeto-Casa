@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProjetoCasaDeShow.Models
@@ -10,6 +11,7 @@ namespace ProjetoCasaDeShow.Models
         public decimal Preco{get;set;}
         public int CasaDeShowId{get;set;}
         public CasaDeShow CasaDeShow{get;set;}
+        public List<Pedido> Pedidos{get; set;}
         public string Genero{get;set;}
         public int QtdVendido{get;set;}
     }
