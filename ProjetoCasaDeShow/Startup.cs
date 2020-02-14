@@ -35,6 +35,8 @@ namespace ProjetoCasaDeShow
             services.AddDbContext<AppContext>(options => options.UseMySql(Configuration.GetConnectionString("Default")));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddTransient<IItemPedidoRepository, ItemPedidoRepository>();
             services.AddTransient<ICasaDeShowRepository, CasaDeShowRepository>();
             services.AddTransient<IEventoRepository, EventoRepository>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();

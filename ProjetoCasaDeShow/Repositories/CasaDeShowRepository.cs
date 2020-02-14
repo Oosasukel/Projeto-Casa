@@ -8,6 +8,8 @@ namespace ProjetoCasaDeShow.Repositories
     {
         void Add(CasaDeShow casaDeShow);
         IList<CasaDeShow> GetCasas();
+
+        CasaDeShow GetCasaPeloId(int casaId);
     }
     
     public class CasaDeShowRepository : BaseRepository<CasaDeShow>, ICasaDeShowRepository
@@ -20,6 +22,11 @@ namespace ProjetoCasaDeShow.Repositories
         {
             dbSet.Add(casaDeShow);
             contexto.SaveChanges();
+        }
+
+        public CasaDeShow GetCasaPeloId(int casaId)
+        {
+            return dbSet.First(casa => casa.Id == casaId);
         }
 
         public IList<CasaDeShow> GetCasas()

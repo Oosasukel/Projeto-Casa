@@ -1,13 +1,11 @@
 @model Evento
 
 @{
-    var casas = ViewBag.casas;
-    var eventos = ViewBag.eventos;
+    var casaDeShowRepository = ViewBag.casaDeShowRepository;
+    var eventoRepository = ViewBag.eventoRepository;
 
-    var teste = ViewBag.evento;
-}
-@if(teste != null){
-    <p>CasaDeShowId @teste.CasaDeShowId Nome @teste.Nome </p>
+    var casas = casaDeShowRepository.GetCasas();
+    var eventos = eventoRepository.GetEventos();
 }
 <h3>Criar Evento</h3>
 
@@ -56,13 +54,16 @@
                         @evento.Data
                     </td>
                     <td>
-                        @evento.Preco
+                        @evento.Preco.ToString("N2")
                     </td>
                     <td>
                         @evento.Genero
                     </td>
                     <td>
-                        @evento.CasaDeShow.Nome
+                        @{
+                            var nomeDaCasa = casaDeShowRepository.GetCasaPeloId(evento.CasaDeShowId).Nome;
+                        }
+                        @nomeDaCasa
                     </td>
                     <td>
                         <button class="btn btn-primary">Editar</button>

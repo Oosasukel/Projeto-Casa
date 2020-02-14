@@ -16,8 +16,12 @@ namespace ProjetoCasaDeShow.Repositories
     
     public class EventoRepository : BaseRepository<Evento>, IEventoRepository
     {
-        public EventoRepository(AppContext contexto) : base(contexto)
+        private readonly ICasaDeShowRepository casaDeShowRepository;
+        private readonly IItemPedidoRepository itemPedidoRepository;
+        public EventoRepository(AppContext contexto, ICasaDeShowRepository casaDeShowRepository, IItemPedidoRepository itemPedidoRepository) : base(contexto)
         {
+            this.casaDeShowRepository = casaDeShowRepository;
+            this.itemPedidoRepository = itemPedidoRepository;
         }
 
         public void Add(Evento evento)
@@ -28,7 +32,8 @@ namespace ProjetoCasaDeShow.Repositories
 
         public IList<Evento> GetEventos()
         {
-            return dbSet.Include(evento => evento.CasaDeShow).ToList();
+            return dbSet.
+                ToList();
         }
     }
 }

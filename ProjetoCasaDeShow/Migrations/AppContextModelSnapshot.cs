@@ -57,9 +57,6 @@ namespace ProjetoCasaDeShow.Migrations
                     b.Property<decimal>("Preco")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("QtdVendido")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CasaDeShowId");

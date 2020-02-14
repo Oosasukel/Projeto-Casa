@@ -1,28 +1,50 @@
+@model Evento
+
+@{
+    var casaDeShowRepository = ViewBag.casaDeShowRepository;
+    var itemPedidoRepository = ViewBag.itemPedidoRepository;
+    var eventoRepository = ViewBag.eventoRepository;
+
+    var eventos = eventoRepository.GetEventos();
+}
+
 <h3>Eventos</h3>
 
 <div>
-    <table class="tabela">
-        <tr>
-            <td>
-                <form method="GET">
-                    <button class="btn btn-danger" asp-route-test="4" asp-action="Evento"></button>
-                </form>
-            </td>
-            <td>
-                Data
-            </td>
-            <td>
-                Preço
-            </td>
-            <td>
-                Gênero
-            </td>
-            <td>
-                Casa
-            </td>
-            <td>
-                10 ingressos disponíveis.
-            </td>
-        </tr>
-    </table>
+    @foreach (var evento in eventos)
+    {
+        <table class="tabela">
+            <tr>
+                <td>
+                    <form asp-action="Evento" method="GET">
+                        <span ><input asp-for="@Model.Id" value="dasds"></span>
+                        <button type="submit"><a>@evento.Nome</a></button>
+                    </form>
+                </td>
+                <td>
+                    @evento.Data
+                </td>
+                <td>
+                    @evento.Preco.ToString("N2")
+                </td>
+                <td>
+                    @evento.Genero
+                </td>
+                <td>
+                    @{
+                        var casa = casaDeShowRepository.GetCasaPeloId(evento.CasaDeShowId);
+                    }
+                    @casa.Nome
+                </td>
+                <td>
+                    @{
+                        var quantidadeVendida = itemPedidoRepository.SomaQuantidadePedidosPeloEventoId(evento.Id);
+                        int ingressosDisponiveis = casa.Capacidade - quantidadeVendida;
+                    }
+                    @ingressosDisponiveis ingressos disponíveis.
+                </td>
+            </tr>
+        </table>
+        
+    }
 </div>

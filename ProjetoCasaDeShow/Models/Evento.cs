@@ -13,6 +13,5 @@ namespace ProjetoCasaDeShow.Models
         public CasaDeShow CasaDeShow{get;set;}
         public List<ItemPedido> ItensPedidos{get; set;}
         public string Genero{get;set;}
-        public int QtdVendido{get;set;}
     }
 }

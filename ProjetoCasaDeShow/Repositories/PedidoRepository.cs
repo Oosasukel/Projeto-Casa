@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore.Http;
 using ProjetoCasaDeShow.Models;
 
@@ -5,6 +6,8 @@ namespace ProjetoCasaDeShow.Repositories
 {
     public interface IPedidoRepository
     {
+        int? GetPedidoId();
+        void SetPedidoId(int pedidoId);
     }
 
     public class PedidoRepository : BaseRepository<Pedido>, IPedidoRepository

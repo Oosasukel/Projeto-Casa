@@ -8,8 +8,8 @@ using ProjetoCasaDeShow;
 namespace ProjetoCasaDeShow.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20200213233843_addGeral")]
-    partial class addGeral
+    [Migration("20200214125013_addInitial")]
+    partial class addInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,9 +58,6 @@ namespace ProjetoCasaDeShow.Migrations
 
                     b.Property<decimal>("Preco")
                         .HasColumnType("decimal(65,30)");
-
-                    b.Property<int>("QtdVendido")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

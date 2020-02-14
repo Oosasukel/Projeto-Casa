@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjetoCasaDeShow.Migrations
 {
-    public partial class addGeral : Migration
+    public partial class addInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,8 +44,7 @@ namespace ProjetoCasaDeShow.Migrations
                     Data = table.Column<string>(nullable: true),
                     Preco = table.Column<decimal>(nullable: false),
                     CasaDeShowId = table.Column<int>(nullable: false),
-                    Genero = table.Column<string>(nullable: true),
-                    QtdVendido = table.Column<int>(nullable: false)
+                    Genero = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -1,8 +1,12 @@
-@model string
-<h3>Nome do evento @Model</h3>
+@model Evento
+@{
+    var evento = Model;
+    int ingressosDisponiveis = evento.CasaDeShow.Capacidade - evento.ItensPedidos.Sum(item => item.Quantidade);
+}
+<h3>@evento.Nome</h3>
 
-<h4>Casa de show</h4>
+<h4>@evento.CasaDeShow.Nome</h4>
 
 <h5>Ingressos</h5>
-<p>10/180 disponíveis</p>
+<p>@ingressosDisponiveis/@evento.CasaDeShow.Capacidade disponíveis</p>
 <button class="btn btn-success">Comprar</button>

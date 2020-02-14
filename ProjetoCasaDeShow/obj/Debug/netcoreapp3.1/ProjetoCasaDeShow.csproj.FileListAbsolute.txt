@@ -225,3 +225,4 @@ C:\Users\rodri\Documents\GFT\GitHub\Projeto-Casa-De-Show-ASP.NET-Core\ProjetoCas
 C:\Users\rodri\Documents\GFT\GitHub\Projeto-Casa-De-Show-ASP.NET-Core\ProjetoCasaDeShow\obj\Debug\netcoreapp3.1\ProjetoCasaDeShow.dll
 C:\Users\rodri\Documents\GFT\GitHub\Projeto-Casa-De-Show-ASP.NET-Core\ProjetoCasaDeShow\obj\Debug\netcoreapp3.1\ProjetoCasaDeShow.pdb
 C:\Users\rodri\Documents\GFT\GitHub\Projeto-Casa-De-Show-ASP.NET-Core\ProjetoCasaDeShow\obj\Debug\netcoreapp3.1\Razor\Views\Pedido\Carrinho.cshtml.g.cs
+C:\Users\ROGN\Downloads\GitHub\Projeto-Casa-De-Show-ASP.NET-Core\ProjetoCasaDeShow\obj\Debug\netcoreapp3.1\Razor\Views\Pedido\Carrinho.cshtml.g.cs
