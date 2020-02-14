@@ -13,13 +13,15 @@ namespace ProjetoCasaDeShow
     {
         private IEventoRepository eventoRepository;
         private ICasaDeShowRepository casaDeShowRepository;
+        private IPedidoRepository pedidoRepository;
 
         private AppContext contexto;
 
-        public DataService(IEventoRepository eventoRepository, ICasaDeShowRepository casaDeShowRepository, AppContext contexto)
+        public DataService(IEventoRepository eventoRepository, ICasaDeShowRepository casaDeShowRepository, IPedidoRepository pedidoRepository, AppContext contexto)
         {
             this.eventoRepository = eventoRepository;
             this.casaDeShowRepository = casaDeShowRepository;
+            this.pedidoRepository = pedidoRepository;
             this.contexto = contexto;
         }
 

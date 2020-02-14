@@ -52,7 +52,6 @@ namespace ProjetoCasaDeShow.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<decimal>("Preco")
@@ -68,11 +67,64 @@ namespace ProjetoCasaDeShow.Migrations
                     b.ToTable("Eventos");
                 });
 
+            modelBuilder.Entity("ProjetoCasaDeShow.Models.ItemPedido", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("EventoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PedidoId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PrecoUnidade")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventoId");
+
+                    b.HasIndex("PedidoId");
+
+                    b.ToTable("ItensPedidos");
+                });
+
+            modelBuilder.Entity("ProjetoCasaDeShow.Models.Pedido", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pedidos");
+                });
+
             modelBuilder.Entity("ProjetoCasaDeShow.Models.Evento", b =>
                 {
                     b.HasOne("ProjetoCasaDeShow.Models.CasaDeShow", "CasaDeShow")
                         .WithMany("Eventos")
                         .HasForeignKey("CasaDeShowId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProjetoCasaDeShow.Models.ItemPedido", b =>
+                {
+                    b.HasOne("ProjetoCasaDeShow.Models.Evento", "Evento")
+                        .WithMany("ItensPedidos")
+                        .HasForeignKey("EventoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjetoCasaDeShow.Models.Pedido", "Pedido")
+                        .WithMany("ItensPedidos")
+                        .HasForeignKey("PedidoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

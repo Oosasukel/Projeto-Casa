@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,13 +26,19 @@ namespace ProjetoCasaDeShow
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
 
+            services.AddControllersWithViews();
+            
+            
+            services.AddDbContext<AppContext>(options => options.UseMySql(Configuration.GetConnectionString("Default")));
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ICasaDeShowRepository, CasaDeShowRepository>();
             services.AddTransient<IEventoRepository, EventoRepository>();
+            services.AddTransient<IPedidoRepository, PedidoRepository>();
             services.AddTransient<IDataService, DataService>();
-
-            services.AddDbContext<AppContext>(options => options.UseMySql(Configuration.GetConnectionString("Default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +56,8 @@ namespace ProjetoCasaDeShow
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 
