@@ -1,4 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using ProjetoCasaDeShow.Models;
 
 namespace ProjetoCasaDeShow.Controllers
 {
@@ -12,7 +15,18 @@ namespace ProjetoCasaDeShow.Controllers
         }
 
         public IActionResult Carrinho(){
+            
+            var pedido = dataService.GetPedidoRepository().GetPedido();
+            ViewBag.itensPedidos = dataService.GetItemPedidoRepository().GetItensPeloPedidoId(pedido.Id);
+            ViewBag.eventoRepository = dataService.GetEventoRepository();
+
             return View();
+        }
+
+        public IActionResult AddItemCarrinho(int eventoId){
+            dataService.GetPedidoRepository().AddItem(eventoId);
+
+            return RedirectToAction("Carrinho");
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjetoCasaDeShow.Models
 {
@@ -8,6 +9,8 @@ namespace ProjetoCasaDeShow.Models
     {
         public string Nome{get;set;}
         public string Data{get;set;}
+        [Column(TypeName = "decimal(18, 2)")]
+        [DataType(DataType.Currency)]
         public decimal Preco{get;set;}
         public int CasaDeShowId{get;set;}
         public CasaDeShow CasaDeShow{get;set;}

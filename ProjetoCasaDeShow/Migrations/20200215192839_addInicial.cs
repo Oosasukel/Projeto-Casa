@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjetoCasaDeShow.Migrations
 {
-    public partial class addInitial : Migration
+    public partial class addInicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,7 @@ namespace ProjetoCasaDeShow.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(nullable: true),
                     Data = table.Column<string>(nullable: true),
-                    Preco = table.Column<decimal>(nullable: false),
+                    Preco = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
                     CasaDeShowId = table.Column<int>(nullable: false),
                     Genero = table.Column<string>(nullable: true)
                 },

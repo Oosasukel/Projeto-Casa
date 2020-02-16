@@ -12,6 +12,9 @@ namespace ProjetoCasaDeShow.Repositories
         void Add(Evento evento);
 
         IList<Evento> GetEventos();
+        Evento GetEventoPeloId(int id);
+        void Update(Evento evento);
+        void Delete(int eventoId);
     }
     
     public class EventoRepository : BaseRepository<Evento>, IEventoRepository
@@ -30,10 +33,35 @@ namespace ProjetoCasaDeShow.Repositories
             contexto.SaveChanges();
         }
 
+        public void Delete(int eventoId)
+        {
+            var eventoDb = dbSet.First(evento => evento.Id == eventoId);
+            contexto.Remove(eventoDb);
+            contexto.SaveChanges();
+        }
+
+        public Evento GetEventoPeloId(int id)
+        {
+            var evento = dbSet.First(evento => evento.Id == id);
+            return evento;
+        }
+
         public IList<Evento> GetEventos()
         {
             return dbSet.
                 ToList();
+        }
+
+        public void Update(Evento evento)
+        {
+            var eventoDb = dbSet.First(eventoDb => eventoDb.Id == evento.Id);
+            eventoDb.Nome = evento.Nome;
+            eventoDb.Preco = evento.Preco;
+            eventoDb.Genero = evento.Genero;
+            eventoDb.Data = evento.Data;
+            eventoDb.CasaDeShowId = evento.CasaDeShowId;
+
+            contexto.SaveChanges();
         }
     }
 }

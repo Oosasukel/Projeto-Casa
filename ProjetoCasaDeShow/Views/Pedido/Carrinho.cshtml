@@ -1,11 +1,34 @@
+@{
+    List<ItemPedido> itens = ViewBag.itensPedidos;
+    var eventoRepository = ViewBag.eventoRepository;
+}
+
 <div>
     <table style="margin: auto">
-        <tr style="padding: 20px">
-            <td style="padding: 20px">NomeEvento</td>
+        <th style="padding: 20px">
+            <td style="padding: 20px">Nome do evento</td>
             <td style="padding: 20px">Quantidade</td>
             <td style="padding: 20px">Preço Unidade</td>
-        </tr>
+        </th>
+        @{
+            decimal total = 0;
+        }
+        @foreach (var item in itens)
+        {
+            
+            <tr style="padding: 20px">
+                <td style="padding: 20px">@eventoRepository.GetEventoPeloId(item.EventoId).Nome</td>
+                <td style="padding: 20px">@item.Quantidade</td>
+                <td style="padding: 20px">@item.PrecoUnidade</td>
+                @{
+                total += item.PrecoUnidade * item.Quantidade;
+                }
+            </tr>
+
+            
+
+        }
     </table>
-    <p style="margin-left: 70%">Total</p>
+    <p style="margin-left: 70%">Total: @total.ToString("N2")</p>
     <button class="btn btn-success">Finalizar Compra</button>
 </div>

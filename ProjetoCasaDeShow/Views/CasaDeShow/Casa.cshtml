@@ -1,19 +1,26 @@
+@model CasaDeShow
 @{
-    var casaDeShowRepository = ViewBag.casaDeShowRepository;
+    var casa = Model;
+}
+<h2>@casa.Nome</h2>
+<h5>@casa.Endereco</h5>
+<h5>Capacidade: @casa.Capacidade</h5>
+
+<h3>Eventos</h3>
+
+@{
     var itemPedidoRepository = ViewBag.itemPedidoRepository;
     var eventoRepository = ViewBag.eventoRepository;
 
     var eventos = eventoRepository.GetEventos();
 }
-
-<h3>Eventos</h3>
 <div>
     @foreach (var evento in eventos)
     {
         <table class="tabela">
             <tr>
                 <td>
-                    <a asp-action="Evento" asp-route-id="@evento.Id">@evento.Nome</a>
+                    <a asp-controller="Evento" asp-action="Evento" asp-route-id="@evento.Id">@evento.Nome</a>
                 </td>
                 <td>
                     @evento.Data
@@ -23,12 +30,6 @@
                 </td>
                 <td>
                     @evento.Genero
-                </td>
-                <td>
-                    @{
-                        var casa = casaDeShowRepository.GetCasaPeloId(evento.CasaDeShowId);
-                    }
-                    @casa.Nome
                 </td>
                 <td>
                     @{

@@ -1,12 +1,19 @@
 @model Evento
 @{
-    var evento = Model;
-    int ingressosDisponiveis = evento.CasaDeShow.Capacidade - evento.ItensPedidos.Sum(item => item.Quantidade);
-}
-<h3>@evento.Nome</h3>
+    
+    var casaDeShowRepository = ViewBag.casaDeShowRepository;
+    var itemPedidoRepository = ViewBag.itemPedidoRepository;
 
-<h4>@evento.CasaDeShow.Nome</h4>
+    var evento = Model;
+    var casa = casaDeShowRepository.GetCasaPeloId(evento.CasaDeShowId);
+
+    int ingressosDisponiveis = casa.Capacidade - itemPedidoRepository.SomaQuantidadePedidosPeloEventoId(evento.Id);
+}
+<h2>@evento.Nome</h2>
+
+<h4>@casa.Nome</h4>
 
 <h5>Ingressos</h5>
-<p>@ingressosDisponiveis/@evento.CasaDeShow.Capacidade disponíveis</p>
-<button class="btn btn-success">Comprar</button>
+<p>@ingressosDisponiveis/@casa.Capacidade disponíveis</p>
+<a>R$ @evento.Preco</a>
+<a asp-controller="Pedido" asp-action="AddItemCarrinho" asp-route-eventoId="@evento.Id"><button class="btn btn-success">Adicionar ao carrinho</button></a>

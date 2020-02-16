@@ -6,11 +6,11 @@
 
 <div class="panel panel-default">
     <div>
-        <form asp-action="AddCasa" method="Post">
+        <form asp-action="AddCasa" asp-route-Id="@Model.Id" method="Post">
             <div class="form-group">
-                <label class="control-lavel">Nome<input asp-for="@Model.Nome" type="text" class="form-control" id="nomeCasa" placeHolder="Villa Country"></label>
-                <label class="control-lavel">Endereço<input asp-for="@Model.Endereco" type="text" class="form-control" id="precoEvento" placeHolder="Av. Francisco Matarazzo, 774 - Água Branca, São Paulo - SP"></label>
-                <label class="control-lavel">Capacidade<input asp-for="@Model.Capacidade" type="number" class="form-control" id="capacidadeCasa" placeHolder="800"></label>
+                <label class="control-lavel">Nome<input asp-for="@Model.Nome" type="text" class="form-control" id="nomeCasa" required></label>
+                <label class="control-lavel">Endereço<input asp-for="@Model.Endereco" type="text" class="form-control" id="precoEvento" placeHolder="Av. Francisco Matarazzo, 774 - Água Branca, São Paulo - SP" required></label>
+                <label class="control-lavel">Capacidade<input asp-for="@Model.Capacidade" type="number" class="form-control" id="capacidadeCasa" placeHolder="800" required></label>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success">
@@ -34,10 +34,10 @@
                     @casa.Capacidade
                 </td>
                 <td>
-                    <button class="btn btn-primary">Editar</button>
+                    <a asp-action="EditCasa" asp-route-id="@casa.Id"><button class="btn btn-primary">Editar</button></a>
                 </td>
                 <td>
-                    <button class="btn btn-danger">Excluir</button>
+                    <a asp-action="DeleteCasa" asp-route-id="@casa.Id"><button class="btn btn-danger">Excluir</button></a>
                 </td>
             </tr> 
         }

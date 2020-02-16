@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoCasaDeShow.Models;
 
@@ -11,14 +12,45 @@ namespace ProjetoCasaDeShow.Controllers
         {
             this.dataService = dataService;
         }
-        public IActionResult CriarCasaDeShow(){
-            ViewBag.casas = dataService.GetCasaDeShowRepository().GetCasas();
-            return View();
+        public IActionResult CriarCasaDeShow(CasaDeShow casa){
+            ViewBag.casas = dataService.GetCasaDeShowRepository().GetCasas().Where(c => c.Id != casa.Id);
+
+            return View(casa);
         }
 
         public IActionResult AddCasa(CasaDeShow casaDeShow){
-            dataService.GetCasaDeShowRepository().Add(casaDeShow);
+            if(casaDeShow.Id == 0){
+                dataService.GetCasaDeShowRepository().Add(casaDeShow);
+            }
+            else{
+                dataService.GetCasaDeShowRepository().Update(casaDeShow);
+            }
             return RedirectToAction("CriarCasaDeShow");
+        }
+
+        public IActionResult EditCasa(int id){
+            var casa = dataService.GetCasaDeShowRepository().GetCasaPeloId(id);
+            return RedirectToAction("CriarCasaDeShow", casa);
+        }
+
+        public IActionResult DeleteCasa(int id){
+            dataService.GetCasaDeShowRepository().Delete(id);
+            return RedirectToAction("CriarCasaDeShow");
+        }
+
+        public IActionResult Casas(){
+            ViewBag.casaDeShowRepository = dataService.GetCasaDeShowRepository();
+
+            return View();
+        }
+
+        public IActionResult Casa(int id){
+            var casa = dataService.GetCasaDeShowRepository().GetCasaPeloId(id);
+            
+            ViewBag.itemPedidoRepository = dataService.GetItemPedidoRepository();
+            ViewBag.eventoRepository = dataService.GetEventoRepository();
+
+            return View(casa);
         }
     }
 }

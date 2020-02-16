@@ -15,11 +15,11 @@ namespace ProjetoCasaDeShow.Controllers
             this.dataService = dataService;
         }
 
-        public IActionResult CriarEvento(){
+        public IActionResult CriarEvento(Evento evento){
             ViewBag.casaDeShowRepository = dataService.GetCasaDeShowRepository();
-            ViewBag.eventoRepository = dataService.GetEventoRepository();
-
-            return View();
+            ViewBag.eventos = dataService.GetEventoRepository().GetEventos().Where(e => e.Id != evento.Id);
+            
+            return View(evento);
         }
 
         public IActionResult Eventos(){
@@ -30,16 +30,35 @@ namespace ProjetoCasaDeShow.Controllers
             return View();
         }
         
+        public IActionResult EditEvento(int id){
+            var evento = dataService.GetEventoRepository().GetEventoPeloId(id);
+            return RedirectToAction("CriarEvento", evento);
+        }
         
-        public IActionResult Evento(Evento evento){
-            return Content(evento.Id.ToString());
-            evento = dataService.GetEventoRepository().GetEventos().Where(e => e.Id == evento.Id).SingleOrDefault();
+        public IActionResult Evento(int id){
+            var evento = dataService.GetEventoRepository().GetEventos().Where(evento => evento.Id == id).SingleOrDefault();
+            
+
+            ViewBag.casaDeShowRepository = dataService.GetCasaDeShowRepository();
+            ViewBag.itemPedidoRepository = dataService.GetItemPedidoRepository();
+
             return View(evento);
         }
 
         public IActionResult AddEvento(Evento evento){
-            dataService.GetEventoRepository().Add(evento);
+            if(evento.Id == 0){
+                dataService.GetEventoRepository().Add(evento);
+            }
+            else{
+                dataService.GetEventoRepository().Update(evento);
+            }
             return RedirectToAction("CriarEvento");
+        }
+
+        public IActionResult DeleteEvento(int id){
+            dataService.GetEventoRepository().Delete(id);
+            return RedirectToAction("CriarEvento");
+
         }
     }
 }

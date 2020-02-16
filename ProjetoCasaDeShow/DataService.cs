@@ -8,6 +8,7 @@ namespace ProjetoCasaDeShow
         IEventoRepository GetEventoRepository();
         ICasaDeShowRepository GetCasaDeShowRepository();
         IItemPedidoRepository GetItemPedidoRepository();
+        IPedidoRepository GetPedidoRepository();
 
         AppContext GetContexto();
     }
@@ -48,6 +49,11 @@ namespace ProjetoCasaDeShow
         public IItemPedidoRepository GetItemPedidoRepository()
         {
             return itemPedidoRepository;
+        }
+
+        public IPedidoRepository GetPedidoRepository()
+        {
+            return pedidoRepository;
         }
     }
 }

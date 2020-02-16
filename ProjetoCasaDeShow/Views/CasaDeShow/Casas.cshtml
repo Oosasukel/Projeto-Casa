@@ -1,0 +1,40 @@
+@{
+    var casaDeShowRepository = ViewBag.casaDeShowRepository;
+
+    var casas = casaDeShowRepository.GetCasas();
+}
+
+<h3>Casas de show</h3>
+<div>
+    @foreach (var casa in casas)
+    {
+        <table class="tabela">
+            <tr>
+                <td>
+                    <a asp-action="Casa" asp-route-id="@casa.Id">@casa.Nome</a>
+                </td>
+                <td>
+                    Capacidade: @casa.Capacidade
+                </td>
+                <td>
+                    @casa.Endereco
+                </td>
+                <td>
+                    @{
+                        int qtdEventos = casaDeShowRepository.GetQtdEventos(casa.Id);
+                    }
+                    @if(qtdEventos > 1){
+                        <a>@qtdEventos eventos.</a>
+                    }
+                    else if(qtdEventos == 1){
+                        <a>@qtdEventos evento.</a>
+                    }
+                    else{
+                        <a>Sem eventos.</a>
+                    }
+                </td>
+            </tr>
+        </table>
+        
+    }
+</div>
