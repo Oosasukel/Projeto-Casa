@@ -24,7 +24,7 @@ namespace ProjetoCasaDeShow.Controllers
 
         public IActionResult Eventos(){
             ViewBag.casaDeShowRepository = dataService.GetCasaDeShowRepository();
-            ViewBag.itemPedidoRepository = dataService.GetItemPedidoRepository();
+            ViewBag.historicoRepository = dataService.GetHistoricoRepository();
             ViewBag.eventoRepository = dataService.GetEventoRepository();
 
             return View();
@@ -40,7 +40,7 @@ namespace ProjetoCasaDeShow.Controllers
             
 
             ViewBag.casaDeShowRepository = dataService.GetCasaDeShowRepository();
-            ViewBag.itemPedidoRepository = dataService.GetItemPedidoRepository();
+            ViewBag.historicoRepository = dataService.GetHistoricoRepository();
 
             return View(evento);
         }

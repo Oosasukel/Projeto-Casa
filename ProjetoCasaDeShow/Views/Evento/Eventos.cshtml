@@ -1,6 +1,6 @@
 @{
     var casaDeShowRepository = ViewBag.casaDeShowRepository;
-    var itemPedidoRepository = ViewBag.itemPedidoRepository;
+    var historicoRepository = ViewBag.historicoRepository;
     var eventoRepository = ViewBag.eventoRepository;
 
     var eventos = eventoRepository.GetEventos();
@@ -32,7 +32,7 @@
                 </td>
                 <td>
                     @{
-                        var quantidadeVendida = itemPedidoRepository.SomaQuantidadePedidosPeloEventoId(evento.Id);
+                        var quantidadeVendida = historicoRepository.CalculaIngressosVendidosPeloEventoId(evento.Id);
                         int ingressosDisponiveis = casa.Capacidade - quantidadeVendida;
                     }
                     @ingressosDisponiveis ingressos disponíveis.

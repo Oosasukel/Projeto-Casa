@@ -46,9 +46,8 @@ namespace ProjetoCasaDeShow.Controllers
 
         public IActionResult Casa(int id){
             var casa = dataService.GetCasaDeShowRepository().GetCasaPeloId(id);
-            
-            ViewBag.itemPedidoRepository = dataService.GetItemPedidoRepository();
-            ViewBag.eventoRepository = dataService.GetEventoRepository();
+
+            ViewBag.historicoRepository = dataService.GetHistoricoRepository();
 
             return View(casa);
         }

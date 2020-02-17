@@ -2,12 +2,12 @@
 @{
     
     var casaDeShowRepository = ViewBag.casaDeShowRepository;
-    var itemPedidoRepository = ViewBag.itemPedidoRepository;
+    var historicoRepository = ViewBag.historicoRepository;
 
     var evento = Model;
     var casa = casaDeShowRepository.GetCasaPeloId(evento.CasaDeShowId);
 
-    int ingressosDisponiveis = casa.Capacidade - itemPedidoRepository.SomaQuantidadePedidosPeloEventoId(evento.Id);
+    int ingressosDisponiveis = casa.Capacidade - historicoRepository.CalculaIngressosVendidosPeloEventoId(evento.Id);
 }
 <h2>@evento.Nome</h2>
 

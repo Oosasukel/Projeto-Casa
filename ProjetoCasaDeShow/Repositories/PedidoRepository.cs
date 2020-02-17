@@ -6,8 +6,6 @@ namespace ProjetoCasaDeShow.Repositories
 {
     public interface IPedidoRepository
     {
-        int? GetPedidoId();
-        void SetPedidoId(int pedidoId);
         Pedido GetPedido();
         void AddItem(int eventoId);
     }
@@ -53,16 +51,12 @@ namespace ProjetoCasaDeShow.Repositories
             return pedido;
         }
 
-        public int? GetPedidoId(){
+        private int? GetPedidoId(){
             return contextAccessor.HttpContext.Session.GetInt32("PedidoId");
         }
 
-        public void SetPedidoId(int pedidoId){
+        private void SetPedidoId(int pedidoId){
             contextAccessor.HttpContext.Session.SetInt32("PedidoId", pedidoId);
-        }
-
-        public void RemovePedidoId(){
-            contextAccessor.HttpContext.Session.Remove("PedidoId");
         }
     }
 }

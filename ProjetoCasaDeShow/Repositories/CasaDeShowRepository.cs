@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using ProjetoCasaDeShow.Models;
 
 namespace ProjetoCasaDeShow.Repositories
@@ -37,7 +38,7 @@ namespace ProjetoCasaDeShow.Repositories
 
         public CasaDeShow GetCasaPeloId(int casaId)
         {
-            return dbSet.First(casa => casa.Id == casaId);
+            return dbSet.Include(casa => casa.Eventos).First(casa => casa.Id == casaId);
         }
 
         public IList<CasaDeShow> GetCasas()

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjetoCasaDeShow.Migrations
 {
-    public partial class addInicial : Migration
+    public partial class historic : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,7 +23,7 @@ namespace ProjetoCasaDeShow.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pedidos",
+                name: "Historicos",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -31,7 +31,7 @@ namespace ProjetoCasaDeShow.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pedidos", x => x.Id);
+                    table.PrimaryKey("PK_Historicos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,6 +58,25 @@ namespace ProjetoCasaDeShow.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Pedidos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    HistoricoId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pedidos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pedidos_Historicos_HistoricoId",
+                        column: x => x.HistoricoId,
+                        principalTable: "Historicos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ItensPedidos",
                 columns: table => new
                 {
@@ -66,7 +85,7 @@ namespace ProjetoCasaDeShow.Migrations
                     EventoId = table.Column<int>(nullable: false),
                     PedidoId = table.Column<int>(nullable: false),
                     Quantidade = table.Column<int>(nullable: false),
-                    PrecoUnidade = table.Column<decimal>(nullable: false)
+                    PrecoUnidade = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,6 +118,11 @@ namespace ProjetoCasaDeShow.Migrations
                 name: "IX_ItensPedidos_PedidoId",
                 table: "ItensPedidos",
                 column: "PedidoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pedidos_HistoricoId",
+                table: "Pedidos",
+                column: "HistoricoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -114,6 +138,9 @@ namespace ProjetoCasaDeShow.Migrations
 
             migrationBuilder.DropTable(
                 name: "CasasDeShow");
+
+            migrationBuilder.DropTable(
+                name: "Historicos");
         }
     }
 }

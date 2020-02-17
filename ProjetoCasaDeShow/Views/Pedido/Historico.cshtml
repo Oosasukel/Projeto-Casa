@@ -1,11 +1,21 @@
+@model Historico
 @{
-    List<ItemPedido> itens = ViewBag.itensPedidos;
+    var itemPedidoRepository = ViewBag.itemPedidoRepository;
     var eventoRepository = ViewBag.eventoRepository;
-    var pedido = ViewBag.pedido;
+    var pedidos = Model.Pedidos;
 }
+<h3>Histórico</h3>
 
-<div>
-    <table style="margin: auto">
+@foreach (var pedido in pedidos)
+{
+    <div>
+
+        <h4>Pedido nº @pedido.Id</h4>
+        @{
+            var itens = itemPedidoRepository.GetItensPeloPedidoId(pedido.Id);
+        }
+
+        <table style="margin: auto">
         <th style="padding: 20px">
             <td style="padding: 20px">Nome do evento</td>
             <td style="padding: 20px">Quantidade</td>
@@ -22,14 +32,14 @@
                 <td style="padding: 20px">@item.Quantidade</td>
                 <td style="padding: 20px">@item.PrecoUnidade</td>
                 @{
-                total += item.PrecoUnidade * item.Quantidade;
+                    total += item.PrecoUnidade * item.Quantidade;
                 }
             </tr>
-
             
-
         }
-    </table>
-    <p style="margin-left: 70%">Total: @total.ToString("N2")</p>
-    <a asp-action="AddHistorico" asp-route-id="@pedido.Id"><button class="btn btn-success">Finalizar Compra</button></a>
-</div>
+        </table>
+        <p style="margin-left: 70%">Total: @total.ToString("N2")</p>
+
+    </div>
+    
+}

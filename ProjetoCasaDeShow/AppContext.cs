@@ -9,6 +9,7 @@ namespace ProjetoCasaDeShow
         public DbSet<Evento> Eventos{get;set;}
         public DbSet<Pedido> Pedidos{get;set;}
         public DbSet<ItemPedido> ItensPedidos{get;set;}
+        public DbSet<Historico> Historicos{get;set;}
 
         public AppContext(DbContextOptions options) : base(options)
         {
@@ -24,6 +25,10 @@ namespace ProjetoCasaDeShow
             
             modelBuilder.Entity<ItemPedido>().HasOne(itemPedido => itemPedido.Pedido).WithMany(pedido => pedido.ItensPedidos);
             modelBuilder.Entity<ItemPedido>().HasOne(itemPedido => itemPedido.Evento).WithMany(evento => evento.ItensPedidos);
+
+            modelBuilder.Entity<Historico>().HasMany(historico => historico.Pedidos);
+
+
         }
     }
 }

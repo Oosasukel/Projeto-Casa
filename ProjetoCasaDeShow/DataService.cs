@@ -9,6 +9,7 @@ namespace ProjetoCasaDeShow
         ICasaDeShowRepository GetCasaDeShowRepository();
         IItemPedidoRepository GetItemPedidoRepository();
         IPedidoRepository GetPedidoRepository();
+        IHistoricoRepository GetHistoricoRepository();
 
         AppContext GetContexto();
     }
@@ -19,15 +20,18 @@ namespace ProjetoCasaDeShow
         private ICasaDeShowRepository casaDeShowRepository;
         private IPedidoRepository pedidoRepository;
         private IItemPedidoRepository itemPedidoRepository;
+        private IHistoricoRepository historicoRepository;
 
         private AppContext contexto;
 
-        public DataService(IEventoRepository eventoRepository, ICasaDeShowRepository casaDeShowRepository, IPedidoRepository pedidoRepository, IItemPedidoRepository itemPedidoRepository, AppContext contexto)
+        public DataService(IEventoRepository eventoRepository, ICasaDeShowRepository casaDeShowRepository, IPedidoRepository pedidoRepository, IItemPedidoRepository itemPedidoRepository, IHistoricoRepository historicoRepository, AppContext contexto)
         {
             this.eventoRepository = eventoRepository;
             this.casaDeShowRepository = casaDeShowRepository;
             this.pedidoRepository = pedidoRepository;
             this.itemPedidoRepository = itemPedidoRepository;
+            this.historicoRepository = historicoRepository;
+
             this.contexto = contexto;
         }
 
@@ -44,6 +48,11 @@ namespace ProjetoCasaDeShow
         public IEventoRepository GetEventoRepository()
         {
             return eventoRepository;
+        }
+
+        public IHistoricoRepository GetHistoricoRepository()
+        {
+            return historicoRepository;
         }
 
         public IItemPedidoRepository GetItemPedidoRepository()

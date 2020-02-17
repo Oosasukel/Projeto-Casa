@@ -40,6 +40,8 @@ namespace ProjetoCasaDeShow
             services.AddTransient<ICasaDeShowRepository, CasaDeShowRepository>();
             services.AddTransient<IEventoRepository, EventoRepository>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();
+            services.AddTransient<IHistoricoRepository, HistoricoRepository>();
+            
             services.AddTransient<IDataService, DataService>();
         }
 

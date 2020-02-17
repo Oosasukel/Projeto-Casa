@@ -14,7 +14,7 @@ namespace ProjetoCasaDeShow.Models
         public decimal Preco{get;set;}
         public int CasaDeShowId{get;set;}
         public CasaDeShow CasaDeShow{get;set;}
-        public List<ItemPedido> ItensPedidos{get; set;}
+        public List<ItemPedido> ItensPedidos{get; set;} = new List<ItemPedido>();
         public string Genero{get;set;}
     }
 }

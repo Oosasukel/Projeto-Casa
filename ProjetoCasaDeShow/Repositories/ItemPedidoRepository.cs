@@ -8,7 +8,6 @@ namespace ProjetoCasaDeShow.Repositories
     {
         IList<ItemPedido> GetItensPedidos();
         IList<ItemPedido> GetItensPedidosPeloEventoId(int eventoId);
-        int SomaQuantidadePedidosPeloEventoId(int eventoId);
         IList<ItemPedido> GetItensPeloPedidoId(int pedidoId);
     }
     public class ItemPedidoRepository : BaseRepository<ItemPedido>, IItemPedidoRepository
@@ -24,11 +23,6 @@ namespace ProjetoCasaDeShow.Repositories
         public IList<ItemPedido> GetItensPedidos()
         {
             return dbSet.ToList();
-        }
-
-        public int SomaQuantidadePedidosPeloEventoId(int eventoId)
-        {
-            return dbSet.Where(pedido => pedido.EventoId == eventoId).Sum(pedido => pedido.Quantidade);
         }
 
         public IList<ItemPedido> GetItensPeloPedidoId(int pedidoId)

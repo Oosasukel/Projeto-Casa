@@ -9,10 +9,9 @@
 <h3>Eventos</h3>
 
 @{
-    var itemPedidoRepository = ViewBag.itemPedidoRepository;
-    var eventoRepository = ViewBag.eventoRepository;
+    var historicoRepository = ViewBag.historicoRepository;
 
-    var eventos = eventoRepository.GetEventos();
+    var eventos = Model.Eventos;
 }
 <div>
     @foreach (var evento in eventos)
@@ -33,7 +32,7 @@
                 </td>
                 <td>
                     @{
-                        var quantidadeVendida = itemPedidoRepository.SomaQuantidadePedidosPeloEventoId(evento.Id);
+                        var quantidadeVendida = historicoRepository.CalculaIngressosVendidosPeloEventoId(evento.Id);
                         int ingressosDisponiveis = casa.Capacidade - quantidadeVendida;
                     }
                     @ingressosDisponiveis ingressos disponíveis.
