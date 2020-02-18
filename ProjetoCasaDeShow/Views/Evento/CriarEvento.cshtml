@@ -18,7 +18,7 @@
             <div class="form-group">
                 <label class="control-lavel">Nome<input asp-for="@Model.Nome" type="text" class="form-control" id="nomeEvento" placeHolder="Linkin Park" required></label>
                 <label class="control-lavel">Data<input asp-for="@Model.Data" type="date" class="form-control" id="dataEvento" required></label>
-                <label class="control-lavel">Preço da Entrada (R$)<input id="preco" oninput="trocaPontoPorVirgula()" asp-for="@Model.Preco" class="form-control" id="precoEvento" placeHolder="200,00" required></label>
+                <label class="control-lavel">Preço da Entrada (R$)<input id="preco" asp-for="@Model.Preco" oninput="trocaVirgulaPorPonto()" class="form-control" id="precoEvento" placeHolder="200.00" required></label>
                 <label class="control-lavel">Genero<select asp-for="@Model.Genero" class="form-control sigle-select" id="generoEvento" required>
                     <option selected value="">[Selecione o gênero]</option>
                     <option value="Rock">Rock</option>

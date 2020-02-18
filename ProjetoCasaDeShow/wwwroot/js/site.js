@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 
-function trocaPontoPorVirgula() {
+function trocaVirgulaPorPonto() {
     var inputPreco = document.querySelector("#preco");
-    inputPreco.value = inputPreco.value.replace('.',',');
+    inputPreco.value = inputPreco.value.replace(',','.');
 }

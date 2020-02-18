@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoCasaDeShow.Models;
+using ProjetoCasaDeShow.Models.ViewModels;
 
 namespace ProjetoCasaDeShow.Controllers
 {
@@ -16,13 +17,12 @@ namespace ProjetoCasaDeShow.Controllers
         }
 
         public IActionResult Carrinho(){
-            
             var pedido = dataService.GetPedidoRepository().GetPedido();
-            ViewBag.itensPedidos = dataService.GetItemPedidoRepository().GetItensPeloPedidoId(pedido.Id);
-            ViewBag.eventoRepository = dataService.GetEventoRepository();
-            ViewBag.pedido = pedido;
+            var itensPedidos = dataService.GetItemPedidoRepository().GetItensPeloPedidoId(pedido.Id);
+            
+            CarrinhoViewModel carrinhoViewModel = new CarrinhoViewModel(itensPedidos, pedido.Id);
 
-            return View();
+            return View(carrinhoViewModel);
         }
 
         public IActionResult AddItemCarrinho(int eventoId){
@@ -45,6 +45,10 @@ namespace ProjetoCasaDeShow.Controllers
             historico.Pedidos = historico.Pedidos.OrderByDescending(pedido => pedido.Id).ToList();
 
             return View(historico);
+        }
+
+        public UpdateQuantidadeResponse updateQuantidade(ItemPedido itemPedido){
+            return dataService.GetPedidoRepository().UpdateQuantidade(itemPedido);
         }
     }
 }

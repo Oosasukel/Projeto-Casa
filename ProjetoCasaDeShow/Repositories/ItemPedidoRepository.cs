@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using ProjetoCasaDeShow.Models;
 
 namespace ProjetoCasaDeShow.Repositories
@@ -27,7 +28,7 @@ namespace ProjetoCasaDeShow.Repositories
 
         public IList<ItemPedido> GetItensPeloPedidoId(int pedidoId)
         {
-            var itensPedidos = dbSet.Where(item => item.PedidoId == pedidoId).ToList();
+            var itensPedidos = dbSet.Include(ip => ip.Evento).Where(item => item.PedidoId == pedidoId).ToList();
             return itensPedidos;
         }
     }

@@ -26,8 +26,15 @@ using ProjetoCasaDeShow.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\ROGN\Downloads\GitHub\Projeto-Casa-De-Show-ASP.NET-Core\ProjetoCasaDeShow\Views\_ViewImports.cshtml"
+using ProjetoCasaDeShow.Models.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"3d2c1d7e7b967ad769f192e1ba13015944779a6d", @"/Views/CasaDeShow/Casas.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"28ad49606f57075bb711b0c0355f03ceb2197dda", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6e305d52e0cfa1363f8285b807bf7deaf31eedc6", @"/Views/_ViewImports.cshtml")]
     public class Views_CasaDeShow_Casas : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Casa", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -75,7 +82,7 @@ using ProjetoCasaDeShow.Models;
 #line hidden
 #nullable disable
             WriteLiteral("        <table class=\"tabela\">\r\n            <tr>\r\n                <td>\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3d2c1d7e7b967ad769f192e1ba13015944779a6d4202", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3d2c1d7e7b967ad769f192e1ba13015944779a6d4435", async() => {
 #nullable restore
 #line 14 "C:\Users\ROGN\Downloads\GitHub\Projeto-Casa-De-Show-ASP.NET-Core\ProjetoCasaDeShow\Views\CasaDeShow\Casas.cshtml"
                                                             Write(casa.Nome);

@@ -26,8 +26,15 @@ using ProjetoCasaDeShow.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\ROGN\Downloads\GitHub\Projeto-Casa-De-Show-ASP.NET-Core\ProjetoCasaDeShow\Views\_ViewImports.cshtml"
+using ProjetoCasaDeShow.Models.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"88936395a7397e92dab7867a1c1fa4b8917b3f96", @"/Views/Evento/Evento.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"28ad49606f57075bb711b0c0355f03ceb2197dda", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6e305d52e0cfa1363f8285b807bf7deaf31eedc6", @"/Views/_ViewImports.cshtml")]
     public class Views_Evento_Evento : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Evento>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Pedido", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -112,7 +119,7 @@ Write(ingressosDisponiveis);
 #line hidden
 #nullable disable
             WriteLiteral("</a>\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "88936395a7397e92dab7867a1c1fa4b8917b3f965672", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "88936395a7397e92dab7867a1c1fa4b8917b3f965905", async() => {
                 WriteLiteral("<button class=\"btn btn-success\">Adicionar ao carrinho</button>");
             }
             );

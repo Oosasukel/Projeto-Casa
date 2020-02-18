@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using ProjetoCasaDeShow.Models;
@@ -8,14 +9,17 @@ namespace ProjetoCasaDeShow.Repositories
     {
         Pedido GetPedido();
         void AddItem(int eventoId);
+        UpdateQuantidadeResponse UpdateQuantidade(ItemPedido itemPedido);
     }
 
     public class PedidoRepository : BaseRepository<Pedido>, IPedidoRepository
     {
+        private IEventoRepository eventoRepository;
         private readonly IHttpContextAccessor contextAccessor;
 
-        public PedidoRepository(AppContext contexto, IHttpContextAccessor contextAccessor) : base(contexto)
+        public PedidoRepository(AppContext contexto, IHttpContextAccessor contextAccessor, IEventoRepository eventoRepository) : base(contexto)
         {
+            this.eventoRepository = eventoRepository;
             this.contextAccessor = contextAccessor;
         }
 
@@ -57,6 +61,30 @@ namespace ProjetoCasaDeShow.Repositories
 
         private void SetPedidoId(int pedidoId){
             contextAccessor.HttpContext.Session.SetInt32("PedidoId", pedidoId);
+        }
+        
+
+        public UpdateQuantidadeResponse UpdateQuantidade(ItemPedido itemPedido)
+        {
+            var itemPedidoDb = //Dar um jeito aqui dbSet.Where(ip => ip.Id == itemPedido.Id).SingleOrDefault();
+
+            if(itemPedidoDb != null){
+                var ingressosDisponiveis = eventoRepository.IngressosDisponiveis(itemPedidoDb.EventoId);
+                if(itemPedido.Quantidade > ingressosDisponiveis) itemPedido.Quantidade = ingressosDisponiveis;
+                
+                if(itemPedido.Quantidade >= 0){
+                    itemPedidoDb.Quantidade = itemPedido.Quantidade;
+                    contexto.SaveChanges();
+                }
+
+                
+
+
+                
+                return new UpdateQuantidadeResponse(itemPedidoDb, )
+            }
+
+            throw new ArgumentException("ItemPedido não encontrado");
         }
     }
 }

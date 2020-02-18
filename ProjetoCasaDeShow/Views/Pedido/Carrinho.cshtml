@@ -1,7 +1,7 @@
+@model CarrinhoViewModel
 @{
-    List<ItemPedido> itens = ViewBag.itensPedidos;
-    var eventoRepository = ViewBag.eventoRepository;
-    var pedido = ViewBag.pedido;
+    var itens = Model.Itens;
+    var pedidoId = Model.PedidoId;
 }
 
 <div>
@@ -17,19 +17,27 @@
         @foreach (var item in itens)
         {
             
-            <tr style="padding: 20px">
-                <td style="padding: 20px">@eventoRepository.GetEventoPeloId(item.EventoId).Nome</td>
-                <td style="padding: 20px">@item.Quantidade</td>
+            <tr style="padding: 20px" item-id="@item.Id">
+                <td style="padding: 20px">@item.Evento.Nome</td>
+                <td style="padding: 20px">
+                    <button onclick="carrinho.clickMenos(this)" style="font-size: 20px">-</button>
+                        <input item-qtd value="@item.Quantidade" onblur="carrinho.updateQuantidade(this)">
+                    <button onclick="carrinho.clickMais(this)" style="font-size: 20px">+</button>
+                </td>
                 <td style="padding: 20px">@item.PrecoUnidade</td>
                 @{
                 total += item.PrecoUnidade * item.Quantidade;
                 }
             </tr>
 
-            
-
         }
     </table>
     <p style="margin-left: 70%">Total: @total.ToString("N2")</p>
-    <a asp-action="AddHistorico" asp-route-id="@pedido.Id"><button class="btn btn-success">Finalizar Compra</button></a>
+    <a asp-action="AddHistorico" asp-route-id="@pedidoId"><button class="btn btn-success">Finalizar Compra</button></a>
 </div>
+
+@section Scripts{
+    <script src="~/js/carrinho.js">
+        
+    </script>
+}

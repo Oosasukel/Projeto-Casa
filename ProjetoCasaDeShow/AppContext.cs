@@ -27,8 +27,6 @@ namespace ProjetoCasaDeShow
             modelBuilder.Entity<ItemPedido>().HasOne(itemPedido => itemPedido.Evento).WithMany(evento => evento.ItensPedidos);
 
             modelBuilder.Entity<Historico>().HasMany(historico => historico.Pedidos);
-
-
         }
     }
 }

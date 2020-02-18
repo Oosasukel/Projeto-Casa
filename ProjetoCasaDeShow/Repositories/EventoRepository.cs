@@ -15,16 +15,17 @@ namespace ProjetoCasaDeShow.Repositories
         Evento GetEventoPeloId(int id);
         void Update(Evento evento);
         void Delete(int eventoId);
+        int IngressosDisponiveis(int eventoId);
     }
     
     public class EventoRepository : BaseRepository<Evento>, IEventoRepository
     {
         private readonly ICasaDeShowRepository casaDeShowRepository;
-        private readonly IItemPedidoRepository itemPedidoRepository;
-        public EventoRepository(AppContext contexto, ICasaDeShowRepository casaDeShowRepository, IItemPedidoRepository itemPedidoRepository) : base(contexto)
+        private readonly IHistoricoRepository historicoRepository;
+        public EventoRepository(AppContext contexto, ICasaDeShowRepository casaDeShowRepository, IHistoricoRepository historicoRepository) : base(contexto)
         {
             this.casaDeShowRepository = casaDeShowRepository;
-            this.itemPedidoRepository = itemPedidoRepository;
+            this.historicoRepository = historicoRepository;
         }
 
         public void Add(Evento evento)
@@ -43,6 +44,7 @@ namespace ProjetoCasaDeShow.Repositories
         public Evento GetEventoPeloId(int id)
         {
             var evento = dbSet.First(evento => evento.Id == id);
+
             return evento;
         }
 
@@ -62,6 +64,13 @@ namespace ProjetoCasaDeShow.Repositories
             eventoDb.CasaDeShowId = evento.CasaDeShowId;
 
             contexto.SaveChanges();
+        }
+
+        public int IngressosDisponiveis(int eventoId){
+            var evento = GetEventoPeloId(eventoId);
+            var casa = casaDeShowRepository.GetCasaPeloId(1);
+
+            return casa.Capacidade - historicoRepository.CalculaIngressosVendidosPeloEventoId(eventoId);
         }
     }
 }
