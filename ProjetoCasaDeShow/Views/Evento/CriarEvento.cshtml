@@ -14,7 +14,7 @@
             // required oninvalid="this.setCustomValidity('Informe o campo')"
             // oninput ="try{setCustomValidity('')catch(e){}"
         }
-        <form class="panel-body" asp-route-Id="@Model.Id" asp-action="AddEvento">
+        <form class="panel-body" asp-route-Id="@Model.Id" asp-action="AddEvento" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="control-lavel">Nome<input asp-for="@Model.Nome" type="text" class="form-control" id="nomeEvento" placeHolder="Linkin Park" required></label>
                 <label class="control-lavel">Data<input asp-for="@Model.Data" type="date" class="form-control" id="dataEvento" required></label>
@@ -33,6 +33,10 @@
                     }
                 </select></label>
             </div>
+            <div>
+                <label>Imagem</label>
+                <input type="file" name="arquivo"/>
+            </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success">
                     Criar
@@ -47,7 +51,7 @@
             {
                 <tr>
                     <td>
-                        @evento.Nome
+                        <a asp-action="Evento" asp-route-id="@evento.Id">@evento.Nome</a>
                     </td>
                     <td>
                         @evento.Data
@@ -60,9 +64,9 @@
                     </td>
                     <td>
                         @{
-                            var nomeDaCasa = casaDeShowRepository.GetCasaPeloId(evento.CasaDeShowId).Nome;
+                            var casa = casaDeShowRepository.GetCasaPeloId(evento.CasaDeShowId);
                         }
-                        @nomeDaCasa
+                        <a asp-action="Casa" asp-controller="CasaDeShow" asp-route-id="@casa.Id">@casa.Nome</a>
                     </td>
                     <td>
                         <a asp-action="EditEvento" asp-route-id="@evento.Id"><button class="btn btn-primary">Editar</button></a>

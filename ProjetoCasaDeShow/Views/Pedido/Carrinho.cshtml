@@ -10,6 +10,7 @@
             <td style="padding: 20px">Nome do evento</td>
             <td style="padding: 20px">Quantidade</td>
             <td style="padding: 20px">Preço Unidade</td>
+            <td style="padding: 20px">Subtotal</td>
         </th>
         @{
             decimal total = 0;
@@ -26,18 +27,20 @@
                 </td>
                 <td style="padding: 20px">@item.PrecoUnidade</td>
                 @{
-                total += item.PrecoUnidade * item.Quantidade;
+                    var subtotal = item.PrecoUnidade * item.Quantidade;
+                    total += subtotal;
                 }
+                <td style="padding: 20px" subtotal>@subtotal</td>
             </tr>
 
         }
     </table>
-    <p style="margin-left: 70%">Total: @total.ToString("N2")</p>
+    <p style="margin-left: 70%" total>Total: @total.ToString("N2")</p>
     <a asp-action="AddHistorico" asp-route-id="@pedidoId"><button class="btn btn-success">Finalizar Compra</button></a>
 </div>
 
 @section Scripts{
-    <script src="~/js/carrinho.js">
+    <script src="~/js/carrinho2.js">
         
     </script>
 }

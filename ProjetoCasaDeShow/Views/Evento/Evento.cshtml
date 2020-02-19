@@ -9,6 +9,12 @@
 
     int ingressosDisponiveis = casa.Capacidade - historicoRepository.CalculaIngressosVendidosPeloEventoId(evento.Id);
 }
+@if(evento.PathImage == null){
+    <img width="300px" src="/Arquivos/Images/default.png">
+}
+else{
+    <img width="300px" src="@evento.PathImage">
+}
 <h2>@evento.Nome</h2>
 
 <h4>@casa.Nome</h4>

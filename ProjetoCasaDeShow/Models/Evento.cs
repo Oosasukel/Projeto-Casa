@@ -16,5 +16,6 @@ namespace ProjetoCasaDeShow.Models
         public CasaDeShow CasaDeShow{get;set;}
         public List<ItemPedido> ItensPedidos{get; set;} = new List<ItemPedido>();
         public string Genero{get;set;}
+        public string PathImage{get;set;}
     }
 }

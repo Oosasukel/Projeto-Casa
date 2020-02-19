@@ -6,11 +6,15 @@
 
 <div class="panel panel-default">
     <div>
-        <form asp-action="AddCasa" asp-route-Id="@Model.Id" method="Post">
+        <form asp-action="AddCasa" asp-route-Id="@Model.Id" method="Post" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="control-lavel">Nome<input asp-for="@Model.Nome" type="text" class="form-control" id="nomeCasa" required></label>
                 <label class="control-lavel">Endereço<input asp-for="@Model.Endereco" type="text" class="form-control" id="precoEvento" placeHolder="Av. Francisco Matarazzo, 774 - Água Branca, São Paulo - SP" required></label>
                 <label class="control-lavel">Capacidade<input asp-for="@Model.Capacidade" type="number" class="form-control" id="capacidadeCasa" placeHolder="800" required></label>
+            </div>
+            <div>
+                <label>Imagem</label>
+                <input type="file" name="arquivo"/>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success">
@@ -25,7 +29,7 @@
         {
             <tr>
                 <td>
-                    @casa.Nome
+                    <a asp-action="Casa" asp-route-id="@casa.Id">@casa.Nome</a>
                 </td>
                 <td>
                     @casa.Endereco

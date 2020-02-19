@@ -9,5 +9,6 @@ namespace ProjetoCasaDeShow.Models
         public int Capacidade{get;set;}
         public string Endereco{get;set;}
         public List<Evento> Eventos{get;set;}
+        public string PathImage{get;set;}
     }
 }

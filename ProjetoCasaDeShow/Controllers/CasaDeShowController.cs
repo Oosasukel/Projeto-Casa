@@ -1,4 +1,5 @@
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoCasaDeShow.Models;
 
@@ -18,13 +19,22 @@ namespace ProjetoCasaDeShow.Controllers
             return View(casa);
         }
 
-        public IActionResult AddCasa(CasaDeShow casaDeShow){
+        public IActionResult AddCasa(CasaDeShow casaDeShow, IFormFile arquivo){
             if(casaDeShow.Id == 0){
                 dataService.GetCasaDeShowRepository().Add(casaDeShow);
             }
             else{
                 dataService.GetCasaDeShowRepository().Update(casaDeShow);
             }
+
+            //Salva imagem
+            string pathImage = dataService.SalvaImagem(arquivo, @"\Arquivos\Images\CasasDeShow\", casaDeShow.Id.ToString());
+
+            if (pathImage != null)
+            {
+                dataService.SalvaCaminhoNaCasa(casaDeShow.Id, pathImage);
+            }
+
             return RedirectToAction("CriarCasaDeShow");
         }
 

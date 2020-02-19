@@ -2,6 +2,13 @@
 @{
     var casa = Model;
 }
+@if(casa.PathImage == null){
+    <img width="300px" src="/Arquivos/Images/default.png">
+}
+else{
+    <img width="300px" src="@casa.PathImage">
+}
+
 <h2>@casa.Nome</h2>
 <h5>@casa.Endereco</h5>
 <h5>Capacidade: @casa.Capacidade</h5>
