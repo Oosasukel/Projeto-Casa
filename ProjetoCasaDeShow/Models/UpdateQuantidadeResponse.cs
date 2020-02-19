@@ -4,13 +4,10 @@ namespace ProjetoCasaDeShow.Models
 {
     public class UpdateQuantidadeResponse
     {
-        public UpdateQuantidadeResponse(ItemPedido itemPedido, CarrinhoViewModel carrinhoViewModel)
+        public UpdateQuantidadeResponse(CarrinhoViewModel carrinhoViewModel)
         {
-            ItemPedido = itemPedido;
             CarrinhoViewModel = carrinhoViewModel;
         }
-
-        public ItemPedido ItemPedido{get;set;}
         public CarrinhoViewModel CarrinhoViewModel{get;set;}
         
     }

@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using ProjetoCasaDeShow.Models;
+using ProjetoCasaDeShow.Models.ViewModels;
 
 namespace ProjetoCasaDeShow.Repositories
 {
@@ -15,12 +17,14 @@ namespace ProjetoCasaDeShow.Repositories
     public class PedidoRepository : BaseRepository<Pedido>, IPedidoRepository
     {
         private IEventoRepository eventoRepository;
+        private IItemPedidoRepository itemPedidoRepository;
         private readonly IHttpContextAccessor contextAccessor;
 
-        public PedidoRepository(AppContext contexto, IHttpContextAccessor contextAccessor, IEventoRepository eventoRepository) : base(contexto)
+        public PedidoRepository(AppContext contexto, IHttpContextAccessor contextAccessor, IItemPedidoRepository itemPedidoRepository, IEventoRepository eventoRepository) : base(contexto)
         {
             this.eventoRepository = eventoRepository;
             this.contextAccessor = contextAccessor;
+            this.itemPedidoRepository = itemPedidoRepository;
         }
 
         public void AddItem(int eventoId)
@@ -66,7 +70,7 @@ namespace ProjetoCasaDeShow.Repositories
 
         public UpdateQuantidadeResponse UpdateQuantidade(ItemPedido itemPedido)
         {
-            var itemPedidoDb = //Dar um jeito aqui dbSet.Where(ip => ip.Id == itemPedido.Id).SingleOrDefault();
+            var itemPedidoDb = itemPedidoRepository.GetItemPedido(itemPedido.Id);
 
             if(itemPedidoDb != null){
                 var ingressosDisponiveis = eventoRepository.IngressosDisponiveis(itemPedidoDb.EventoId);
@@ -77,11 +81,11 @@ namespace ProjetoCasaDeShow.Repositories
                     contexto.SaveChanges();
                 }
 
-                
+                var itens = contexto.ItensPedidos.AsNoTracking().Where(ip => ip.PedidoId == itemPedidoDb.PedidoId).ToList();
 
+                CarrinhoViewModel carrinhoViewModel = new CarrinhoViewModel(itens, itemPedidoDb.PedidoId);
 
-                
-                return new UpdateQuantidadeResponse(itemPedidoDb, )
+                return new UpdateQuantidadeResponse(carrinhoViewModel);
             }
 
             throw new ArgumentException("ItemPedido não encontrado");

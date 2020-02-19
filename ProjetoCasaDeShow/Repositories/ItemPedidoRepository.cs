@@ -10,6 +10,7 @@ namespace ProjetoCasaDeShow.Repositories
         IList<ItemPedido> GetItensPedidos();
         IList<ItemPedido> GetItensPedidosPeloEventoId(int eventoId);
         IList<ItemPedido> GetItensPeloPedidoId(int pedidoId);
+        ItemPedido GetItemPedido(int id);
     }
     public class ItemPedidoRepository : BaseRepository<ItemPedido>, IItemPedidoRepository
     {
@@ -19,6 +20,10 @@ namespace ProjetoCasaDeShow.Repositories
 
         public IList<ItemPedido> GetItensPedidosPeloEventoId(int eventoid){
             return dbSet.Where(itemPedido => itemPedido.EventoId == eventoid).ToList();;
+        }
+
+        public ItemPedido GetItemPedido(int id){
+            return dbSet.Where(ip => ip.Id == id).SingleOrDefault();
         }
 
         public IList<ItemPedido> GetItensPedidos()

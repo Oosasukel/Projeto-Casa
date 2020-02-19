@@ -47,8 +47,10 @@ namespace ProjetoCasaDeShow.Controllers
             return View(historico);
         }
 
-        public UpdateQuantidadeResponse updateQuantidade(ItemPedido itemPedido){
-            return dataService.GetPedidoRepository().UpdateQuantidade(itemPedido);
+        [HttpPost]
+        public UpdateQuantidadeResponse updateQuantidade([FromBody]ItemPedido itemPedido){
+            var varr = dataService.GetPedidoRepository().UpdateQuantidade(itemPedido);
+            return varr;
         }
     }
 }

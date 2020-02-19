@@ -17,12 +17,14 @@ class Carrinho{
         this.enviaPost(item);
     }
     
-    enviaPost(data){
+    enviaPost(informacao){
+        var test = JSON.stringify(informacao);
+        
         $.ajax({
             url: '/Pedido/updateQuantidade',
-            type: 'GET',
+            type: 'Post',
             contentType: 'application/json',
-            data: data
+            data: JSON.stringify(informacao)
         }).done(function(response){
             location.reload();
         });
@@ -32,9 +34,9 @@ class Carrinho{
         var linhaItem = $(elemento).parents('[item-id]');
         var itemId = $(linhaItem).attr('item-id');
         var novaQtd = $(linhaItem).find('[item-qtd]').val();
-    
+        
         return {
-            Id: itemId,
+            Id: Number(itemId),
             Quantidade: novaQtd
         };
     }
