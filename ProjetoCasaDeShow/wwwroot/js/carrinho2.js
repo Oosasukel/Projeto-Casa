@@ -26,6 +26,7 @@ class Carrinho {
             contentType: 'application/json',
             data: JSON.stringify(informacao)
         }).done(function(response) {
+            //Aqui ta pegando só o primeiro item, arrumar isso
             let itemPedido = response.carrinhoViewModel.itens.find(item => item.pedidoId == response.carrinhoViewModel.pedidoId);
             let linhaDoItem = $('[item-id=' + itemPedido.id + ']');
             linhaDoItem.find('input').val(itemPedido.quantidade);

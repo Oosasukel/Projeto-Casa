@@ -22,6 +22,7 @@ namespace ProjetoCasaDeShow.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddCasa(CasaDeShow casaDeShow, IFormFile arquivo){
+
             if(casaDeShow.Id == 0){
                 dataService.GetCasaDeShowRepository().Add(casaDeShow);
             }
