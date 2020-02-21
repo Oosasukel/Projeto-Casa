@@ -8,8 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProjetoCasaDeShow.Areas.Identity.Data
 {
-    public class IdentityContext : IdentityDbContext<IdentityUser>
+    public class IdentityContext : IdentityDbContext<ProjetoCasaDeShowUser>
     {
+
         public IdentityContext(DbContextOptions<IdentityContext> options)
             : base(options)
         {

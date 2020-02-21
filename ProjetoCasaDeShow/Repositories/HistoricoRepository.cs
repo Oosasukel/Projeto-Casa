@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ProjetoCasaDeShow.Areas.Identity.Data;
 using ProjetoCasaDeShow.Models;
 
 namespace ProjetoCasaDeShow.Repositories
@@ -15,9 +17,11 @@ namespace ProjetoCasaDeShow.Repositories
     public class HistoricoRepository : BaseRepository<Historico>, IHistoricoRepository
     {
         private readonly IHttpContextAccessor contextAccessor;
-        public HistoricoRepository(AppContext contexto, IHttpContextAccessor contextAccessor) : base(contexto)
+        private UserManager<ProjetoCasaDeShowUser> userManager;
+        public HistoricoRepository(AppContext contexto, IHttpContextAccessor contextAccessor, UserManager<ProjetoCasaDeShowUser> userManager) : base(contexto)
         {
             this.contextAccessor = contextAccessor;
+            this.userManager = userManager;
         }
 
         public int CalculaIngressosVendidosPeloEventoId(int eventoId){
@@ -43,22 +47,28 @@ namespace ProjetoCasaDeShow.Repositories
         }
 
         private void RemovePedidoId(){
-            contextAccessor.HttpContext.Session.Remove("PedidoId");
+            contextAccessor.HttpContext.Session.Remove($"PedidoId_{GetClienteId()}");
         }
 
         public Historico GetHistorico()
         {
             var historico = dbSet.
-                                Include(historico => historico.Pedidos).Where(historico => historico.Id == 1).SingleOrDefault();
+                                Include(historico => historico.Pedidos).Where(historico => historico.ClienteId == GetClienteId()).SingleOrDefault();
 
             if(historico == null){
-                historico = new Historico();
-                historico.Id = 1;
+                historico = new Historico(GetClienteId());
                 dbSet.Add(historico);
                 contexto.SaveChanges();
             }
 
             return historico;
+        }
+
+        private string GetClienteId(){
+            var claimsPrincipal = contextAccessor.HttpContext.User;
+            var clienteId = userManager.GetUserId(claimsPrincipal);
+
+            return clienteId;
         }
     }
 }

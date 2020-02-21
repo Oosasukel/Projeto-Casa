@@ -1,4 +1,5 @@
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoCasaDeShow.Models;
@@ -13,14 +14,17 @@ namespace ProjetoCasaDeShow.Controllers
         {
             this.dataService = dataService;
         }
+        
+        [Authorize]
         public IActionResult CriarCasaDeShow(CasaDeShow casa){
-            ViewBag.casas = dataService.GetCasaDeShowRepository().GetCasas().Where(c => c.Id != casa.Id);
+            ViewBag.casas = dataService.GetCasaDeShowRepository().GetCasasCliente().Where(c => c.Id != casa.Id);
 
             return View(casa);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult AddCasa(CasaDeShow casaDeShow, IFormFile arquivo){
 
             if(casaDeShow.Id == 0){
@@ -41,11 +45,13 @@ namespace ProjetoCasaDeShow.Controllers
             return RedirectToAction("CriarCasaDeShow");
         }
 
+        [Authorize]
         public IActionResult EditCasa(int id){
             var casa = dataService.GetCasaDeShowRepository().GetCasaPeloId(id);
             return RedirectToAction("CriarCasaDeShow", casa);
         }
 
+        [Authorize]
         public IActionResult DeleteCasa(int id){
             dataService.GetCasaDeShowRepository().Delete(id);
             return RedirectToAction("CriarCasaDeShow");

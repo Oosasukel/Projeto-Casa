@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +21,11 @@ namespace ProjetoCasaDeShow.Controllers
             _webHostEnvironment = env;
         }
 
+        [Authorize]
         public IActionResult CriarEvento(Evento evento)
         {
             ViewBag.casaDeShowRepository = dataService.GetCasaDeShowRepository();
-            ViewBag.eventos = dataService.GetEventoRepository().GetEventos().Where(e => e.Id != evento.Id);
+            ViewBag.eventos = dataService.GetEventoRepository().GetEventosCliente().Where(e => e.Id != evento.Id);
 
             return View(evento);
         }
@@ -37,6 +39,7 @@ namespace ProjetoCasaDeShow.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult EditEvento(int id)
         {
             var evento = dataService.GetEventoRepository().GetEventoPeloId(id);
@@ -55,6 +58,7 @@ namespace ProjetoCasaDeShow.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult AddEvento(Evento evento, IFormFile arquivo)
         {
             //Salva o evento
@@ -78,6 +82,7 @@ namespace ProjetoCasaDeShow.Controllers
             return RedirectToAction("CriarEvento");
         }
 
+        [Authorize]
         public IActionResult DeleteEvento(int id)
         {
             dataService.GetEventoRepository().Delete(id);

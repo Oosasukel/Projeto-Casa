@@ -26,18 +26,16 @@ class Carrinho {
             contentType: 'application/json',
             data: JSON.stringify(informacao)
         }).done(function(response) {
-            //Aqui ta pegando só o primeiro item, arrumar isso
-            let itemPedido = response.carrinhoViewModel.itens.find(item => item.pedidoId == response.carrinhoViewModel.pedidoId);
-            let linhaDoItem = $('[item-id=' + itemPedido.id + ']');
-            linhaDoItem.find('input').val(itemPedido.quantidade);
-            linhaDoItem.find('[subtotal]').html((itemPedido.quantidade * itemPedido.precoUnidade).duasCasas());
-
             var total = 0;
             response.carrinhoViewModel.itens.forEach(item => {
+                let itemPedido = response.carrinhoViewModel.itens.find(i => i.id == item.id);
+                let linhaDoItem = $('[item-id=' + item.id + ']');
+                linhaDoItem.find('input').val(itemPedido.quantidade);
+                linhaDoItem.find('[subtotal]').html((itemPedido.quantidade * itemPedido.precoUnidade).duasCasas());
                 total += item.precoUnidade * item.quantidade;
             });
 
-            linhaDoItem.parents('table').next('[total]').html((total).duasCasas());
+            $('table').next('[total]').html('Total: ' + (total).duasCasas());
         });
     }
 

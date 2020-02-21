@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ProjetoCasaDeShow.Areas.Identity.Data;
 using ProjetoCasaDeShow.Models;
 
 namespace ProjetoCasaDeShow.Repositories
@@ -9,6 +12,7 @@ namespace ProjetoCasaDeShow.Repositories
     {
         void Add(CasaDeShow casaDeShow);
         IList<CasaDeShow> GetCasas();
+        IList<CasaDeShow> GetCasasCliente();
 
         CasaDeShow GetCasaPeloId(int casaId);
         void Delete(int casaId);
@@ -19,12 +23,19 @@ namespace ProjetoCasaDeShow.Repositories
     
     public class CasaDeShowRepository : BaseRepository<CasaDeShow>, ICasaDeShowRepository
     {
-        public CasaDeShowRepository(AppContext contexto) : base(contexto)
+        private readonly IHttpContextAccessor contextAccessor;
+        private UserManager<ProjetoCasaDeShowUser> userManager;
+        public CasaDeShowRepository(AppContext contexto,
+                                    IHttpContextAccessor contextAccessor,
+                                    UserManager<ProjetoCasaDeShowUser> userManager) : base(contexto)
         {
+            this.contextAccessor = contextAccessor;
+            this.userManager = userManager;
         }
 
         public void Add(CasaDeShow casaDeShow)
         {
+            casaDeShow.ClienteId = GetClienteId();
             dbSet.Add(casaDeShow);
             contexto.SaveChanges();
         }
@@ -46,6 +57,11 @@ namespace ProjetoCasaDeShow.Repositories
             return dbSet.ToList();
         }
 
+        public IList<CasaDeShow> GetCasasCliente()
+        {
+            return dbSet.Where(c => c.ClienteId == GetClienteId()).ToList();
+        }
+
         public int GetQtdEventos(int casaId)
         {
             var qtdEventos = contexto.Eventos.Where(evento => evento.CasaDeShowId == casaId).ToList().Count;
@@ -60,6 +76,13 @@ namespace ProjetoCasaDeShow.Repositories
             casa.Endereco = casaDeShow.Endereco;
             
             contexto.SaveChanges();
+        }
+        
+        private string GetClienteId(){
+            var claimsPrincipal = contextAccessor.HttpContext.User;
+            var clienteId = userManager.GetUserId(claimsPrincipal);
+
+            return clienteId;
         }
     }
 }

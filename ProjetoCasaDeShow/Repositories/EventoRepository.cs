@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using ProjetoCasaDeShow.Areas.Identity.Data;
 using ProjetoCasaDeShow.Models;
 
 namespace ProjetoCasaDeShow.Repositories
@@ -12,6 +15,7 @@ namespace ProjetoCasaDeShow.Repositories
         void Add(Evento evento);
 
         IList<Evento> GetEventos();
+        IList<Evento> GetEventosCliente();
         Evento GetEventoPeloId(int id);
         void Update(Evento evento);
         void Delete(int eventoId);
@@ -22,14 +26,24 @@ namespace ProjetoCasaDeShow.Repositories
     {
         private readonly ICasaDeShowRepository casaDeShowRepository;
         private readonly IHistoricoRepository historicoRepository;
-        public EventoRepository(AppContext contexto, ICasaDeShowRepository casaDeShowRepository, IHistoricoRepository historicoRepository) : base(contexto)
+        private readonly IHttpContextAccessor contextAccessor;
+        private UserManager<ProjetoCasaDeShowUser> userManager;
+
+        public EventoRepository(AppContext contexto,
+                                ICasaDeShowRepository casaDeShowRepository,
+                                IHistoricoRepository historicoRepository,
+                                IHttpContextAccessor contextAccessor,
+                                UserManager<ProjetoCasaDeShowUser> userManager) : base(contexto)
         {
             this.casaDeShowRepository = casaDeShowRepository;
             this.historicoRepository = historicoRepository;
+            this.contextAccessor = contextAccessor;
+            this.userManager = userManager;
         }
 
         public void Add(Evento evento)
         {
+            evento.ClienteId = GetClienteId();
             dbSet.Add(evento);
             contexto.SaveChanges();
         }
@@ -71,6 +85,18 @@ namespace ProjetoCasaDeShow.Repositories
             var casa = casaDeShowRepository.GetCasaPeloId(1);
 
             return casa.Capacidade - historicoRepository.CalculaIngressosVendidosPeloEventoId(eventoId);
+        }
+
+        public IList<Evento> GetEventosCliente()
+        {
+            return dbSet.Where(e => e.ClienteId == GetClienteId()).ToList();
+        }
+
+        private string GetClienteId(){
+            var claimsPrincipal = contextAccessor.HttpContext.User;
+            var clienteId = userManager.GetUserId(claimsPrincipal);
+
+            return clienteId;
         }
     }
 }

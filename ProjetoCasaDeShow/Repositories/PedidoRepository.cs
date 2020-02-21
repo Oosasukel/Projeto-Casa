@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ProjetoCasaDeShow.Areas.Identity.Data;
 using ProjetoCasaDeShow.Models;
 using ProjetoCasaDeShow.Models.ViewModels;
 
@@ -19,12 +21,14 @@ namespace ProjetoCasaDeShow.Repositories
         private IEventoRepository eventoRepository;
         private IItemPedidoRepository itemPedidoRepository;
         private readonly IHttpContextAccessor contextAccessor;
+        private UserManager<ProjetoCasaDeShowUser> userManager;
 
-        public PedidoRepository(AppContext contexto, IHttpContextAccessor contextAccessor, IItemPedidoRepository itemPedidoRepository, IEventoRepository eventoRepository) : base(contexto)
+        public PedidoRepository(AppContext contexto, IHttpContextAccessor contextAccessor, IItemPedidoRepository itemPedidoRepository, IEventoRepository eventoRepository, UserManager<ProjetoCasaDeShowUser> userManager) : base(contexto)
         {
             this.eventoRepository = eventoRepository;
             this.contextAccessor = contextAccessor;
             this.itemPedidoRepository = itemPedidoRepository;
+            this.userManager = userManager;
         }
 
         public void AddItem(int eventoId)
@@ -50,7 +54,7 @@ namespace ProjetoCasaDeShow.Repositories
             var pedido = dbSet.Where(pedido => pedido.Id == pedidoId).SingleOrDefault();
 
             if(pedidoId == null){
-                pedido = new Pedido();
+                pedido = new Pedido(GetClienteId());
                 dbSet.Add(pedido);
                 contexto.SaveChanges();
                 SetPedidoId(pedido.Id);
@@ -60,11 +64,18 @@ namespace ProjetoCasaDeShow.Repositories
         }
 
         private int? GetPedidoId(){
-            return contextAccessor.HttpContext.Session.GetInt32("PedidoId");
+            return contextAccessor.HttpContext.Session.GetInt32($"PedidoId_{GetClienteId()}");
         }
 
         private void SetPedidoId(int pedidoId){
-            contextAccessor.HttpContext.Session.SetInt32("PedidoId", pedidoId);
+            contextAccessor.HttpContext.Session.SetInt32($"PedidoId_{GetClienteId()}", pedidoId);
+        }
+
+        private string GetClienteId(){
+            var claimsPrincipal = contextAccessor.HttpContext.User;
+            var clienteId = userManager.GetUserId(claimsPrincipal);
+
+            return clienteId;
         }
         
 

@@ -14,7 +14,7 @@ namespace ProjetoCasaDeShow.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("ProjetoCasaDeShow.Models.CasaDeShow", b =>
@@ -25,6 +25,10 @@ namespace ProjetoCasaDeShow.Migrations
 
                     b.Property<int>("Capacidade")
                         .HasColumnType("int");
+
+                    b.Property<string>("ClienteId")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Endereco")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -48,6 +52,10 @@ namespace ProjetoCasaDeShow.Migrations
 
                     b.Property<int>("CasaDeShowId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ClienteId")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Data")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -76,6 +84,10 @@ namespace ProjetoCasaDeShow.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("ClienteId")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
@@ -114,6 +126,10 @@ namespace ProjetoCasaDeShow.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("ClienteId")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int?>("HistoricoId")
                         .HasColumnType("int");

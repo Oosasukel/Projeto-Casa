@@ -45,8 +45,7 @@ namespace ProjetoCasaDeShow
             services.AddTransient<IHistoricoRepository, HistoricoRepository>();
             
             services.AddTransient<IDataService, DataService>();
-
-
+            
 
 
 
@@ -78,8 +77,8 @@ namespace ProjetoCasaDeShow
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 
-                options.LoginPath = "/Account/Login";
-                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
         }
@@ -116,6 +115,7 @@ namespace ProjetoCasaDeShow
                 endpoints.MapRazorPages();
             });
             serviceProvider.GetService<AppContext>().Database.Migrate();
+            serviceProvider.GetService<IdentityContext>().Database.Migrate();
         }
     }
 }

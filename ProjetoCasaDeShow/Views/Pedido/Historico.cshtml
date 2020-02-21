@@ -20,6 +20,7 @@
             <td style="padding: 20px">Nome do evento</td>
             <td style="padding: 20px">Quantidade</td>
             <td style="padding: 20px">Preço Unidade</td>
+            <td style="padding: 20px">Subtotal</td>
         </th>
         @{
             decimal total = 0;
@@ -32,8 +33,10 @@
                 <td style="padding: 20px">@item.Quantidade</td>
                 <td style="padding: 20px">@item.PrecoUnidade</td>
                 @{
-                    total += item.PrecoUnidade * item.Quantidade;
+                    var subtotal = item.PrecoUnidade * item.Quantidade;
+                    total += subtotal;
                 }
+                <td style="padding: 20px">@subtotal.ToString("N2")</td>
             </tr>
             
         }

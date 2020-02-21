@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoCasaDeShow.Models;
 using ProjetoCasaDeShow.Models.ViewModels;
@@ -16,6 +17,7 @@ namespace ProjetoCasaDeShow.Controllers
             this.dataService = dataService;
         }
 
+        [Authorize]
         public IActionResult Carrinho(){
             var pedido = dataService.GetPedidoRepository().GetPedido();
             var itensPedidos = dataService.GetItemPedidoRepository().GetItensPeloPedidoId(pedido.Id);
@@ -25,18 +27,21 @@ namespace ProjetoCasaDeShow.Controllers
             return View(carrinhoViewModel);
         }
 
+        [Authorize]
         public IActionResult AddItemCarrinho(int eventoId){
             dataService.GetPedidoRepository().AddItem(eventoId);
 
             return RedirectToAction("Carrinho");
         }
 
+        [Authorize]
         public IActionResult AddHistorico(int id){
             dataService.GetHistoricoRepository().Add(id);
             
             return RedirectToAction("Historico");
         }
 
+        [Authorize]
         public IActionResult Historico(){
             var historico = dataService.GetHistoricoRepository().GetHistorico();
             ViewBag.itemPedidoRepository = dataService.GetItemPedidoRepository();
@@ -48,6 +53,7 @@ namespace ProjetoCasaDeShow.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public UpdateQuantidadeResponse updateQuantidade([FromBody]ItemPedido itemPedido){
             var response = dataService.GetPedidoRepository().UpdateQuantidade(itemPedido);
             return response;

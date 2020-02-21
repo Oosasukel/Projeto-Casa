@@ -7,6 +7,12 @@ namespace ProjetoCasaDeShow.Models
 {
     public class Evento : BaseModel
     {
+        public Evento(){
+            
+        }
+        public Evento(string clienteId){
+            ClienteId = clienteId;
+        }
         public string Nome{get;set;}
         public string Data{get;set;}
         [Column(TypeName = "decimal(18, 2)")]
@@ -17,5 +23,7 @@ namespace ProjetoCasaDeShow.Models
         public List<ItemPedido> ItensPedidos{get; set;} = new List<ItemPedido>();
         public string Genero{get;set;}
         public string PathImage{get;set;}
+        [Required]
+        public string ClienteId{get;set;}
     }
 }

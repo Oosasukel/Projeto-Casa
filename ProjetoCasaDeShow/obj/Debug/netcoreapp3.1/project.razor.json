@@ -20526,6 +20526,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\Views\\CasaDeShow\\Casas.cshtml",
       "TargetPath": "Views\\CasaDeShow\\Casas.cshtml",
       "FileKind": "mvc"
@@ -20556,13 +20561,38 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\Register.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\Login.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\Areas\\Identity\\Pages\\Account\\Manage\\_ManageNav.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\_ManageNav.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -20583,6 +20613,11 @@
     {
       "FilePath": "c:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\ROGN\\Downloads\\GitHub\\Projeto-Casa-De-Show-ASP.NET-Core\\ProjetoCasaDeShow\\Areas\\Identity\\Pages\\Account\\Manage\\_ViewImports.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\_ViewImports.cshtml",
       "FileKind": "mvc"
     }
   ],
