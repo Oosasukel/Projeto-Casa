@@ -13,6 +13,7 @@ namespace ProjetoCasaDeShow.Models
         public Evento(string clienteId){
             ClienteId = clienteId;
         }
+        [Required(ErrorMessage = "Puts, nome não pode ser vazio.")]
         public string Nome{get;set;}
         public string Data{get;set;}
         [Column(TypeName = "decimal(18, 2)")]

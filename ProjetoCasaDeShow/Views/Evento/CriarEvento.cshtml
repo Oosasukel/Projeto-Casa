@@ -16,16 +16,16 @@
         }
         <form class="panel-body" asp-route-Id="@Model.Id" asp-action="AddEvento" method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <label class="control-lavel">Nome<input asp-for="@Model.Nome" type="text" class="form-control" id="nomeEvento" placeHolder="Linkin Park" required></label>
-                <label class="control-lavel">Data<input asp-for="@Model.Data" type="date" class="form-control" id="dataEvento" required></label>
-                <label class="control-lavel">Preço da Entrada (R$)<input id="preco" asp-for="@Model.Preco" oninput="trocaVirgulaPorPonto()" class="form-control" id="precoEvento" placeHolder="200.00" required></label>
-                <label class="control-lavel">Genero<select asp-for="@Model.Genero" class="form-control sigle-select" id="generoEvento" required>
+                <label class="control-lavel">Nome<input asp-for="@Model.Nome" type="text" class="form-control" id="nomeEvento" placeHolder="Linkin Park"></label>
+                <label class="control-lavel">Data<input asp-for="@Model.Data" type="date" class="form-control" id="dataEvento"></label>
+                <label class="control-lavel">Preço da Entrada (R$)<input id="preco" asp-for="@Model.Preco" oninput="trocaVirgulaPorPonto()" class="form-control" id="precoEvento" placeHolder="200.00"></label>
+                <label class="control-lavel">Genero<select asp-for="@Model.Genero" class="form-control sigle-select" id="generoEvento">
                     <option selected value="">[Selecione o gênero]</option>
                     <option value="Rock">Rock</option>
                     <option value="Sertanejo">Sertanejo</option>
                     <option value="Indie">Índie</option>
                 </select></label>
-                <label class="control-lavel">Casa<select asp-for="@Model.CasaDeShowId" class="form-control sigle-select" id="casaEvento" required>
+                <label class="control-lavel">Casa<select asp-for="@Model.CasaDeShowId" class="form-control sigle-select" id="casaEvento">
                     <option selected value="">[Selecione a casa]</option>
                     @foreach (var casa in casas)
                     {
